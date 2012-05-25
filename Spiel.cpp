@@ -6,6 +6,7 @@ Spiel::Spiel(void)
 {
 	AnzahlSchiffe=0;
 	AnzahlSpieler=0;
+
 	for(int i=0; i<2; i++)
     {
         for(int j=0; j<10; j++)
@@ -56,15 +57,35 @@ Spiel::~Spiel(void)
 {
 }
 
-int Spiel::verbindeSpieler()
+int Spiel::verbindeSpieler(Spieler* verbindenderSpieler)
 {
     if(AnzahlSpieler>1) return (-1);
     AnzahlSpieler++;
+    verbundeneSpieler[AnzahlSpieler-1]=verbindenderSpieler;
     return AnzahlSpieler-1;
+}
+
+void Spiel::setzeSchiffe(int Spielernummer)
+{
+    std::cout << "Spieler " << Spielernummer+1 << ", bitte Schiffe setzten:" << std::endl;
+    for(int i=0; i<AnzahlSchiffe; i++)
+    {
+        std::cout << "Setzen von Schiff Nr. " << i+1 << " mit " << Schifflaenge[i] << " Feldern Länge" << std::endl;
+        if(!setzeSchiff(i)) i--;
+    }
 }
 
 bool Spiel::setzeSchiff(int Schiffnummer)
 {
-    std::cout << "Setzen von Schiff Nr. " << Schiffnummer+1 << " mit " << Schifflaenge[Schiffnummer] << " Feldern Länge" << std::endl;
+    return true;
+}
+
+bool Spiel::empfangePosition(char* positionEingabe, int* positionAusgabe)
+{
+    char ersteStelle=positionEingabe[0];
+    char* zweiteStelle;
+    zweiteStelle=new char[2];
+    zweiteStelle[0]=positionEingabe[1];
+    zweiteStelle[1]=positionEingabe[2];
     return true;
 }
