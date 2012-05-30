@@ -1,6 +1,6 @@
 #include "Spiel.h"
-#include <iostream>
 
+//char arrays übergeben ohne bekannte länge wahrscheinlich schlecht idee -> später noch ändern
 
 Spiel::Spiel(void)
 {
@@ -18,37 +18,48 @@ Spiel::Spiel(void)
         }
     }
 
-	std::cout << "Neues Spiel gestartet" << std::endl;
-
+	//std::cout << "Neues Spiel gestartet" << std::endl;
+    UI.textAusgeben("Neues Spiel gestartet\n");
 	do{
-		std::cout << "Bitte die Anzahl an Schiffen (1-5) eingeben: ";
-		std::cin >> AnzahlSchiffe;
-		if(std::cin.bad() || std::cin.fail() || AnzahlSchiffe<1 || AnzahlSchiffe>5)
+		//std::cout << "Bitte die Anzahl an Schiffen (1-5) eingeben: ";
+		UI.textAusgeben("Bitte die Anzahl an Schiffen (1-5) eingeben: ");
+		//std::cin >> AnzahlSchiffe;
+		AnzahlSchiffe=UI.intErfragen();
+		if(AnzahlSchiffe<1 || AnzahlSchiffe>5) UI.textAusgeben("Ungültige Schiffanzahl!\n\n");
+		/*if(std::cin.bad() || std::cin.fail() || AnzahlSchiffe<1 || AnzahlSchiffe>5)
         {
             std::cin.clear();//setzt cin Zustand zurück
             std::cin.ignore(100, '\n'); //verwirft alle im cin Puffer gespeicherten Eingaben (bis zum 100. element (wahrscheinlich net gut^^)) inklusive des Zeilenumbruchs
-            AnzahlSchiffe=0; std::cout << "Falsche Eingabe, bitte Wiederholen!" << std::endl;
-        }
-	}while(!AnzahlSchiffe);
+            AnzahlSchiffe=0;
+            //std::cout << "Falsche Eingabe, bitte Wiederholen!" << std::endl;
+            UI.textAusgeben("Falsche Eingabe, bitte Wiederholen!\n");
+        }*/
+	}while(AnzahlSchiffe<1 || AnzahlSchiffe>5);
 
-	std::cout << std::endl;
+	//std::cout << std::endl;
 
 	Schifflaenge = new int[AnzahlSchiffe];
-	std::cout << "Und nun bitte die Länge (2-5 Felder) der einzelnen Schiffe: " << std::endl;
+	//std::cout << "Und nun bitte die Länge (2-5 Felder) der einzelnen Schiffe: " << std::endl;
+	UI.textAusgeben("Und nun bitte die Länge (2-5 Felder) der einzelnen Schiffe:\n");
 	for(int i=0; i<AnzahlSchiffe; i++)
 	{
-		std::cout << "Schiff " << (i+1) << ": " << std::endl;
+		//std::cout << "Schiff " << (i+1) << ": " << std::endl;
+		UI.textAusgeben("Schiff ");
+		UI.zahlAusgeben(i+1);
+		UI.textAusgeben(": ");
 		int Laengetmp=0;
-		std::cin >> Laengetmp;
-		if(std::cin.bad() || std::cin.fail() || Laengetmp<2 || Laengetmp>5)
+		//std::cin >> Laengetmp;
+		Laengetmp=UI.intErfragen();
+		if(/*std::cin.bad() || std::cin.fail() || */Laengetmp<2 || Laengetmp>5)
 		{
-		    std::cin.clear();
-            std::cin.ignore(100, '\n');
-			std::cout << "Falsche Eingabe, bitte Wiederholen!" << std::endl;
+		    //std::cin.clear();
+            //std::cin.ignore(100, '\n');
+			//std::cout << "Falsche Eingabe, bitte Wiederholen!" << std::endl;
+			//UI.textAusgeben("Falsche Eingabe, bitte Wiederholen!\n");
+			UI.textAusgeben("Schiff hat eine falsche Länge!\n");
 			i--;
 		}
 		else Schifflaenge[i]=Laengetmp;
-
 	}
 }
 
@@ -64,6 +75,8 @@ int Spiel::verbindeSpieler(Spieler* verbindenderSpieler)
     verbundeneSpieler[AnzahlSpieler-1]=verbindenderSpieler;
     return AnzahlSpieler-1;
 }
+
+//TODO: ab hier komplett überarbeiten!
 
 void Spiel::setzeSchiffe(int Spielernummer)
 {

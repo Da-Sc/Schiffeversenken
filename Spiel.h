@@ -1,7 +1,9 @@
 #ifndef SPIEL_H
 #define SPIEL_H
 #include "Spieler.h"
-
+#include "Frage.h"
+#include <iostream>
+//muss noch umgeschrieben werden da vermehrt mit Feldklassen gaerbeitet wird!
 class Spieler;//da Klassen sich gegenseitig benötigen
 
 class Spiel
@@ -20,6 +22,7 @@ private:
 	int Felder[2][10][10];
 	int AnzahlSpieler;
 	Spieler* verbundeneSpieler[2];
+	Frage UI;
 };
 
 #endif // SPIEL_H
