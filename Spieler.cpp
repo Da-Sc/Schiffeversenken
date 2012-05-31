@@ -1,5 +1,4 @@
 #include "Spieler.h"
-#include <iostream>
 
 Spieler::Spieler()
 {
@@ -31,13 +30,18 @@ bool Spieler::verbindezuSpiel(Spiel* tmpSpiel)
         Spielernummer=inSpiel->verbindeSpieler(this);
         if(Spielernummer>=0)
         {
-            std::cout << "Spieler " << Spielernummer+1 << " verbunden" << std::endl;
+            //std::cout << "Spieler " << Spielernummer+1 << " verbunden" << std::endl;
+            Frage::holeInstanz()->textAusgeben("Spieler ");//beim Spiel ausgeben
+            Frage::holeInstanz()->zahlAusgeben(Spielernummer+1);
+            Frage::holeInstanz()->textAusgeben(" verbunden\n");
             return true;
         }
-        std::cout << "Spiel ist leider schon voll belegt!" << std::endl;
+        //std::cout << "Spiel ist leider schon voll belegt!" << std::endl;
+        Frage::holeInstanz()->textAusgeben("Spiel ist leider schon voll belegt!\n");//beim SpielER ausgeben
         return false;
     }
-    std::cout << "Verbindung konnte nicht hergestellt werden." << std::endl;
+    //std::cout << "Verbindung konnte nicht hergestellt werden." << std::endl;
+    Frage::holeInstanz()->textAusgeben("Verbindung konnte nicht hergestellt werden.\n");//beim SpielER ausgeben
     return false;
 }
 

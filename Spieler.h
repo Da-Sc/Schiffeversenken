@@ -1,6 +1,8 @@
 #ifndef SPIELER_H
 #define SPIELER_H
 #include "Spiel.h"
+#include "Frage.h"
+#include <iostream>
 
 class Spiel;
 
@@ -11,6 +13,7 @@ class Spieler
         virtual ~Spieler();
         virtual bool verbindezuSpiel(Spiel*);
         virtual bool sendePosition();
+        //Frage UI;//iwie global ?!?->Singleton
     protected:
     private:
         int Spielernummer;

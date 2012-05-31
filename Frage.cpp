@@ -11,10 +11,25 @@ Frage::~Frage()
     //dtor
 }
 
+Frage *Frage::instanz=NULL;
+
+Frage* Frage::holeInstanz()
+{
+    if(instanz == NULL)//überprüft ob einer Instanz schon angelegt wurde
+      instanz=new Frage();
+
+    return instanz;
+}
+
 void Frage::textAusgeben(char* text)
 {
     std::cout << text << std::flush;
 }
+
+/*void Frage::textAusgeben(char* text, Spieler* externerSpieler)
+{
+    std::cout << text << std::flush;
+}*/
 
 void Frage::zahlAusgeben(int zahl)
 {
@@ -31,7 +46,6 @@ int Frage::intErfragen()
 		    std::cin.clear();
             std::cin.ignore(100, '\n');
             tmp=0;
-            //if(!zustand) std::cout << std::endl;
 			textAusgeben("Falsche Eingabe, bitte Wiederholen: ");
 			std::cin >> tmp;
 			zustand=false;

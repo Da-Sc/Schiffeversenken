@@ -18,25 +18,25 @@ Spiel::Spiel(void)
         }
     }
 
-    UI.textAusgeben("Neues Spiel gestartet\n");
+    Frage::holeInstanz()->textAusgeben("Neues Spiel gestartet\n");//beim Spiel ausgeben
 	do{
-		UI.textAusgeben("Bitte die Anzahl an Schiffen (1-5) eingeben: ");
-		AnzahlSchiffe=UI.intErfragen();
-		if(AnzahlSchiffe<1 || AnzahlSchiffe>5) UI.textAusgeben("Ungültige Schiffanzahl!\n\n");
+		Frage::holeInstanz()->textAusgeben("Bitte die Anzahl an Schiffen (1-5) eingeben: ");//beim Spiel ausgeben
+		AnzahlSchiffe=Frage::holeInstanz()->intErfragen();
+		if(AnzahlSchiffe<1 || AnzahlSchiffe>5) Frage::holeInstanz()->textAusgeben("Ungültige Schiffanzahl!\n\n");//beim Spiel ausgeben
 	}while(AnzahlSchiffe<1 || AnzahlSchiffe>5);
 
 	Schifflaenge = new int[AnzahlSchiffe];
-	UI.textAusgeben("Und nun bitte die Länge (2-5 Felder) der einzelnen Schiffe:\n");
+	Frage::holeInstanz()->textAusgeben("Und nun bitte die Länge (2-5 Felder) der einzelnen Schiffe:\n");//beim Spiel ausgeben
 	for(int i=0; i<AnzahlSchiffe; i++)
 	{
-		UI.textAusgeben("Schiff ");
-		UI.zahlAusgeben(i+1);
-		UI.textAusgeben(": ");
+		Frage::holeInstanz()->textAusgeben("Schiff ");//beim Spiel ausgeben
+		Frage::holeInstanz()->zahlAusgeben(i+1);
+		Frage::holeInstanz()->textAusgeben(": ");
 		int Laengetmp=0;
-		Laengetmp=UI.intErfragen();
+		Laengetmp=Frage::holeInstanz()->intErfragen();
 		if(Laengetmp<2 || Laengetmp>5)
 		{
-			UI.textAusgeben("Schiff hat eine falsche Länge!\n");
+			Frage::holeInstanz()->textAusgeben("Schiff hat eine falsche Länge!\n");//beim Spiel ausgeben
 			i--;
 		}
 		else Schifflaenge[i]=Laengetmp;

@@ -6,14 +6,18 @@
 class Frage
 {
     public:
-        Frage();
+        static Frage* holeInstanz();
+        //Frage();
         virtual ~Frage();
-        void textAusgeben(char*);
+        void textAusgeben(char*);//wo wirds ausgegeben?!?!
+        //virtual void textAusgeben(char*, Spieler*)
         void zahlAusgeben(int);
         int intErfragen();
         //void positionErfragen(int*);
-    protected:
+    protected://private auch in vererbten aber trotzdem verfügbar
+        Frage();//damit genau eine Instanz von Frage existiert: http://www.oop-trainer.de/Themen/Singleton.html
     private:
+        static Frage *instanz;
         bool zustand;//true = Alles OK, false = upps Fehler
 };
 

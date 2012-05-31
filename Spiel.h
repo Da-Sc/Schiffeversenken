@@ -15,6 +15,8 @@ public:
 	virtual void setzeSchiffe(int);
 	virtual bool setzeSchiff(int);
 	virtual bool empfangePosition(char*,int*);
+    //Frage UI;//das muss doch irgendwie global gehen !?!? -> Singleton
+
 
 private:
 	int AnzahlSchiffe;
@@ -22,7 +24,6 @@ private:
 	int Felder[2][10][10];
 	int AnzahlSpieler;
 	Spieler* verbundeneSpieler[2];
-	Frage UI;
 };
 
 #endif // SPIEL_H
